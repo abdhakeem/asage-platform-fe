@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import {Container, Row, Col } from "react-bootstrap";
 import Sidebar from '../../components/sidebar'
 
-import FirstScreen from '../FirstScreen';
-import SecondScreen from '../SecondScreen';
-import ThirdScreen from '../ThirdScreen';
+import FirstScreen from '../Homepage';
+import SecondScreen from '../UploadFileScreen';
+import ThirdScreen from '../ReviewScreen';
 import AfterDataValidation from '../AfterDataValidation';
 import LastScreen from '../LastScreen';
 

@@ -7,6 +7,7 @@ import CardOne from "../../assets/cardOne.png"
 import {useDropzone} from 'react-dropzone'
 import { useCallback } from "react";
 import Table from 'react-bootstrap/Table';
+import { TableLoading } from 'react-bootstrap-table-loading';
 
 import styles from './styles.module.scss'
 
@@ -16,17 +17,20 @@ export default function SecondScreen(props) {
 
     const [currentFileId, setCurrentFileId] = useState(1)
 
+    const [loading, setLoading] = useState(false)
     const onDrop = useCallback(async acceptedFiles => {
         const formData = new FormData();
         const currentFile = acceptedFiles[acceptedFiles.length - 1]
         formData.append('file', currentFile);
 
         try {
+            setLoading(true)
             const response = await fetch(ProcessDataAPI, {
                 method: 'POST',
                 body: formData
             });
             const data = await response.json();
+            setLoading(false)
             props.onFileListChange(
             [...props.fileList, 
                 {
@@ -103,6 +107,10 @@ export default function SecondScreen(props) {
                     </tr>
                 </tbody>
                 ))}
+                { loading ? (<TableLoading
+                    columns={5}
+                    lines={3}
+                />) : false}
                 </Table>
             </div>
             <button type="button" class="btn btn-secondary btn-lg" onClick={() => props.onChange()}>Next</button>
