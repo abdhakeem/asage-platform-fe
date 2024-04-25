@@ -8,7 +8,8 @@ $inactive-color: rgb(175,185,201);
 }
 
 .asageLogo {
-    padding-top: 20px;
+    
+    padding-top: 40px;
     padding-bottom: 20px;
     color: $font-color;
     font-size: 18px;
@@ -23,8 +24,8 @@ $inactive-color: rgb(175,185,201);
     .listItem {
         cursor:pointer;
         list-style: none;
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         margin-bottom: 16px;
 
         &:global(.active) {

@@ -7,6 +7,7 @@ import ChatIcon from "../../assets/chatIcon.png"
 import NetZeroIcon from "../../assets/downwardTrend.png"
 import WorldIcon from "../../assets/worldIcon.png"
 import BuildingIcon from "../../assets/buildingIcon.png"
+import DataManagement from "../../assets/dataIcon.png"
 import styles from './sidebar.module.scss'
 import Stack from 'react-bootstrap/Stack';
 import { useState } from 'react'
@@ -24,6 +25,7 @@ export default function Sidebar() {
             { name: "My Consultants", icon: ChatIcon, active: false},
             { name: "Net-Zero Marketplace", icon: NetZeroIcon, active: false},
             { name: "Green Finance Marketplace", icon: BuildingIcon, active: false},
+            { name: "Data Management", icon: DataManagement, active: false},
         ]
         return menuItems.map((tab, index) => (
             <li className={index === selectedTabIndex ? styles.listItem + " active" : styles.listItem} onClick={() => setSelectedTabIndex(index)}>
@@ -32,7 +34,7 @@ export default function Sidebar() {
                         <Col xs={2}>
                             <img src={tab.icon} className={styles.menuIcon}/>
                         </Col>
-                        <Col xs={10} className={tab.active ? styles.tabLabel + " active" : styles.tabLabel}>
+                        <Col xs={10} className={index === selectedTabIndex ? styles.tabLabel + " active" : styles.tabLabel}>
                             {tab.name}
                         </Col>
                     </Row>
