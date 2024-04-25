@@ -10,8 +10,6 @@ import Table from 'react-bootstrap/Table';
 
 import styles from './styles.module.scss'
 
-const ProcessDataApi = "http://localhost:8000/process_document/"
-
 export default function ThirdScreen(props) {
     return (
         <>
@@ -25,6 +23,16 @@ export default function ThirdScreen(props) {
                 </ol>
             </nav>
             <div>
+                <div style={{marginTop: "30px", marginBottom: "30px"}}>
+                    <h6 className={"text-start"} style={{lineHeight: "2"}}>
+                        Number of File Source(s): {props.materialList.map(item => item.file_source).reduce( (acc, currentValue) => {
+                            acc.add(currentValue)
+                            return acc
+                        }, new Set()).size} <br />
+                        Number of Scope 1, 2 and 3 Emission Activities identified: {props.materialList.length}<br />
+                        Number of uncategorized Emission Activities: 0
+                    </h6>
+                </div>
                 <Table striped bordered>
                 <thead>
                     <tr>

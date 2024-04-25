@@ -10,7 +10,7 @@ import Table from 'react-bootstrap/Table';
 
 import styles from './styles.module.scss'
 
-const ProcessDataApi = "http://localhost:8000/process_document/"
+import { ProcessDataAPI } from "../../constants"
 
 export default function SecondScreen(props) {
 
@@ -22,7 +22,7 @@ export default function SecondScreen(props) {
         formData.append('file', currentFile);
 
         try {
-            const response = await fetch(ProcessDataApi, {
+            const response = await fetch(ProcessDataAPI, {
                 method: 'POST',
                 body: formData
             });
