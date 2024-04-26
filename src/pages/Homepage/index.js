@@ -1,15 +1,16 @@
 
-import {Row, Col } from "react-bootstrap";
-
+import { Row, Col } from "react-bootstrap";
+import { useState } from "react";
 import CardOne from "../../assets/cardOne.png"
 import CardTwo from "../../assets/cardTwo.png"
 import CardThree from "../../assets/cardThree.png"
-
+import Gemini from  "../../assets/gemini.png";
 
 import styles from './styles.module.scss'
 
 export default function FirstScreen(props) {
 
+    const [isCardSelected, setCardSelected] = useState(false)
     return (
         <>
             <h1 className={"text-start"}>My Emission Activities</h1>
@@ -25,7 +26,7 @@ export default function FirstScreen(props) {
             <h3>How would you like to automate your Scope 1, 2 and 3 data input?</h3>
             <Row>
                 <Col xs={4}>
-                    <div className={styles.card + " card"}>
+                    <div className={isCardSelected ? styles.cardSelected + " card" : styles.card + " card"} onClick={() => setCardSelected(true)}>
                         <div class="card-body">
                             <img src={CardOne} className={styles.cardIcon} />
                             <p className={styles.cardText + " card-text"}>Upload file(s) of any format with data of any amount</p>
@@ -57,10 +58,11 @@ export default function FirstScreen(props) {
                     </div>
                 </Col>
             </Row>
-            <button type="button" class="btn btn-secondary btn-lg" onClick={() => props.onChange()}>Next</button>
+            <button type="button" class="btn btn-primary btn-lg" onClick={() => props.onChange()}>Next</button>
 
-            <Row>
-                Powered by
+            <Row className={styles.geminiRow}>
+                <span style={{"position": "relative", "top": "4px"
+                }}>Powered by</span> <img src={Gemini} className={styles.gemini}/>
             </Row>
         </>
     )

@@ -8,6 +8,7 @@ import {useDropzone} from 'react-dropzone'
 import { useCallback } from "react";
 import Table from 'react-bootstrap/Table';
 import { TableLoading } from 'react-bootstrap-table-loading';
+import Gemini from  "../../assets/gemini.png";
 
 import styles from './styles.module.scss'
 
@@ -31,18 +32,15 @@ export default function SecondScreen(props) {
             });
             const data = await response.json();
             setLoading(false)
-            props.onFileListChange(
-            [...props.fileList, 
-                {
-                    id: currentFileId,
-                    fileName: currentFile.name,
-                    format: currentFile.type,
-                    uploadStatus: "Uploaded",
-                    dataStatus: "Processed",
-                }
-            ])
+            props.onFileListChange({
+                id: currentFileId,
+                fileName: currentFile.name,
+                format: currentFile.type,
+                uploadStatus: "Uploaded",
+                dataStatus: "Processed",
+            })
             const materialList = data.materials.map((material) => ({ ...material, accepted: true}))
-            props.onMaterialListChange([...props.materialList, ...materialList])
+            props.onMaterialListChange([...materialList])
             setCurrentFileId(currentFileId => currentFileId + 1)
             console.log('Upload successful:', data);
         } catch (error) {
@@ -96,12 +94,12 @@ export default function SecondScreen(props) {
                     <th>Data Interpretation Status</th>
                     </tr>
                 </thead>
-                { props.fileList.map(fileObject => (
+                { props.fileList.map((fileObject, idx) => (
                     <tbody>
                     <tr>
-                    <td>{fileObject.id}</td>
+                    <td>{idx + 1}</td>
                     <td>{fileObject.fileName}</td>
-                    <td>{fileObject.format}</td>
+                    <td>{fileObject.fileName.split(".")[1]}</td>
                     <td>{fileObject.uploadStatus}</td>
                     <td>{fileObject.dataStatus}</td>
                     </tr>
@@ -113,7 +111,13 @@ export default function SecondScreen(props) {
                 />) : false}
                 </Table>
             </div>
-            <button type="button" class="btn btn-secondary btn-lg" onClick={() => props.onChange()}>Next</button>
+            <button type="button" class="btn btn-secondary btn-lg" style={{marginBottom: "20px"}} onClick={() => props.onBackChange()}>Back</button>
+            <button type="button" class="btn btn-primary btn-lg" style={{marginLeft: "12px", marginBottom: "20px"}} onClick={() => props.onChange()}>Next</button>
+        
+            <Row className={styles.geminiRow}>
+                <span style={{"position": "relative", "top": "4px"
+                }}>Powered by</span> <img src={Gemini} className={styles.gemini}/>
+            </Row>
         </>
     )
 }

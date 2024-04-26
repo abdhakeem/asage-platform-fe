@@ -9,6 +9,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import Table from 'react-bootstrap/Table';
 import { ProcessDataAPI } from "../../constants"
 import styles from './styles.module.scss'
+import Gemini from  "../../assets/gemini.png";
 
 
 export default function AfterDataValidation(props) {
@@ -55,7 +56,13 @@ export default function AfterDataValidation(props) {
                 ))}
                 </Table>
             </div>
-            <button type="button" class="btn btn-secondary btn-lg" onClick={() => props.onChange()}>Next</button>
+            <button type="button" class="btn btn-secondary btn-lg" style={{marginBottom: "20px"}} onClick={() => props.onBackChange()}>Back</button>
+            <button type="button" class="btn btn-primary btn-lg" style={{marginLeft: "12px", marginBottom: "20px"}} onClick={() => props.onChange()}>Next</button>
+
+            <Row className={styles.geminiRow}>
+                <span style={{"position": "relative", "top": "4px"
+                }}>Powered by</span> <img src={Gemini} className={styles.gemini}/>
+            </Row>
         </>
     )
 }

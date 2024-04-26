@@ -23,7 +23,7 @@ export default function InputScreen() {
         scope_category: "scope-category", 
         scope_sub_category: "scope sub category", 
         accepted: true
-    }]*/
+    }]
 
     const mock_material_list = [{
         "item": "Cryolite (Synthetic)",
@@ -58,36 +58,49 @@ export default function InputScreen() {
         "ef_source": "GHG PROTOCOL",
         "emissions": 0,
         "accepted": true,
-    }]
+    }]*/
         
     const [currentPage, setCurrentPage] = useState(0)
     const [fileList, setFileList] = useState([]) 
-    const [materialList, setMaterialList] = useState(mock_material_list)
+    const [materialList, setMaterialList] = useState([])
 
     const moveToNextPage = () => setCurrentPage((page) => page + 1)
 
+    const moveToPrevPage = () => setCurrentPage((page) => page -1)
+
+    const handleFileListChange = (newFileList) => {
+        setFileList((oldFileList) => [...oldFileList,newFileList])
+    }
+
+    const handelMaterialListChange = (newMaterialList) => {
+        setMaterialList((oldMaterialList) => [...oldMaterialList, ...newMaterialList])
+    }
     const pages = {
         0: (<FirstScreen onChange={moveToNextPage} />),
         1: (
         <SecondScreen 
+        onBackChange={moveToPrevPage}
         onChange={moveToNextPage} 
         fileList={fileList} 
-        onFileListChange={(newFileList) => setFileList(newFileList)}
+        onFileListChange={handleFileListChange}
         materialList={materialList}
-        onMaterialListChange={(newMaterialList) => setMaterialList(newMaterialList)}/>),
+        onMaterialListChange={handelMaterialListChange}/>),
         2: (
         <ThirdScreen 
         onChange={moveToNextPage} 
+        onBackChange={moveToPrevPage}
         materialList={materialList}
         onMaterialListChange={(newMaterialList) => setMaterialList(newMaterialList)}/>),
         3: (
         <AfterDataValidation 
         onChange={moveToNextPage} 
+        onBackChange={moveToPrevPage}
         materialList={materialList}
         onMaterialListChange={(newMaterialList) => setMaterialList(newMaterialList)}/>),
         4: (
         <LastScreen 
         onChange={moveToNextPage} 
+        onBackChange={moveToPrevPage}
         materialList={materialList}
         onMaterialListChange={(newMaterialList) => setMaterialList(newMaterialList)}/>
         )

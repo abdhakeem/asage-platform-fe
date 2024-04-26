@@ -20,8 +20,23 @@ $primary-font-color: rgb(112, 174, 145);
     }
 }
 
+.cardSelected {
+    @extend .card;
+    border: 6px solid black;
+}
+
 .comingSoon {
     color: $primary-font-color;
     font-size: 22px;
     font-weight: bold;
+}
+
+.gemini {
+    width: 128px;
+}
+
+.geminiRow {
+    margin-top: 200px;
+    justify-content: center;
+    align-items: center;
 }

@@ -2,6 +2,7 @@
 import { useState } from "react"
 import {Row, Col, ToggleButtonGroup } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+import Gemini from  "../../assets/gemini.png";
 
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
@@ -47,7 +48,7 @@ export default function LastScreen(props) {
                         <td>{material.quantity}</td>
                         <td>{material.ef}</td>
                         <td>{material.process}</td>
-                        <td>{material.emissions}</td>
+                        <td>{Number(material.emissions).toFixed(2)}</td>
                         <td>{material.facility}</td>
                         <td>{material.equipment}</td>
                     </tr>
@@ -55,7 +56,13 @@ export default function LastScreen(props) {
                 ))}
                 </Table>
             </div>
-            <button type="button" class="btn btn-secondary btn-lg" onClick={() => props.onChange()}>Next</button>
+            <button type="button" class="btn btn-secondary btn-lg" style={{marginBottom: "20px"}} onClick={() => props.onBackChange()}>Back</button>
+            <button type="button" class="btn btn-primary btn-lg" style={{marginLeft: "12px", marginBottom: "20px"}} onClick={() => props.onChange()}>Next</button>
+        
+            <Row className={styles.geminiRow}>
+                <span style={{"position": "relative", "top": "4px"
+                }}>Powered by</span> <img src={Gemini} className={styles.gemini}/>
+            </Row>
         </>
     )
 }
